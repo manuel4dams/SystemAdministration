@@ -1,0 +1,25 @@
+db:
+  container_name: mail-db
+  environment:
+    MYSQL_ROOT_PASSWORD: ElyIg2G9RKkEglizc58A
+    MYSQL_DATABASE: mail
+  image: mysql:5.7
+  volumes:
+    - ../DATA/mail-db/mysql:/var/lib/mysql
+  tty: true
+  stdin_open: true
+  restart: always
+
+phpmyadmin:
+  container_name: mail-db_phpmyadmin
+  ports:
+    - "14080:80/tcp"
+  #environment:
+  #  VIRTUAL_HOST: maildb.babedibubip.de
+  #  VIRTUAL_PORT: 14080
+  image: phpmyadmin/phpmyadmin
+  links:
+    - db
+  tty: true
+  stdin_open: true
+  restart: always
